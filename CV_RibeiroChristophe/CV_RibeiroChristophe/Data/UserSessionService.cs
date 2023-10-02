@@ -1,6 +1,6 @@
 ﻿namespace CV_RibeiroChristophe.Data
 {
-    public class AdminService
+    public class UserSessionService
     {
     }
 }

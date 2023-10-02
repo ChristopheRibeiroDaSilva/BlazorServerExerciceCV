@@ -1,6 +1,6 @@
 ﻿namespace CV_RibeiroChristophe.Data
 {
-    public class User
+    public class UserSession
     {
         public string login { get; }
         public string password { get; }
