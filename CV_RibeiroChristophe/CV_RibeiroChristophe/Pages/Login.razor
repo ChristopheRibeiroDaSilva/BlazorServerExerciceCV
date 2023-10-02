@@ -1,0 +1,104 @@
+﻿@page "/"
+@using CV_RibeiroChristophe.Data
+@using CV_RibeiroChristophe.Authentication
+@using System.Security.Claims
+@layout NoLayout
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject IJSRuntime jsRunTime
+@inject IUserAccountService userAccountService
+
+<PageTitle>Login</PageTitle>
+
+<div class="row">
+    <div class="col-lg-4 offset-lg-4 pt-4 border" style=" text-align: center">
+        <EditForm Model="@user" OnValidSubmit="@ValidateUser">
+            <div>
+                <h3 style="font-weight:bold; color:purple;">Login page to my CV</h3>
+            </div>
+            <div>
+                <br />
+            </div>
+            <div class="col-12 row" style="margin-left: initial;">
+                <input class="form-control col-12" style="text-align: center;" @bind="user.login" placeholder="login" />
+            </div>
+            <br />
+            <div class="col-12 row" style="margin-left: initial;">
+                <input type="password" class="form-control col-12" style="text-align: center;" @bind="user.password" placeholder="password" />
+            </div>
+            <br />
+            <div class="col-12 row">
+                <span class="col-12"></span>
+                <input type="submit" class="form-control col-6 btn btn-primary" value="Login" />
+                <a @onclick="LogAsGuest" style="margin-top: 5px" href="javascript:void(0)" class="col">Log as Guest</a>
+            </div>
+            <br />
+            <div class="col-12 row" style="text-align:left; font-weight:bold">
+                <span class="col-12" style="color: red; text-align:center;">@LoginMesssage</span>
+            </div>
+        </EditForm>
+    </div>
+</div>
+@code {
+    public UserAccount user = new UserAccount();
+    public string LoginMesssage { get; set; }
+
+
+    protected override async Task OnInitializedAsync()
+    {
+        try{
+            var customAuthenticationProvider = (CustomAuthenticationStateProvider)AuthenticationStateProvider;
+            await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(null);
+        }
+        catch
+        {
+            
+        }
+
+    }
+
+    private async void LogAsGuest()
+    {
+        user.login = "guest";
+        user.password = "guest";
+
+        var returnedUser = await userAccountService.GetByLogin(user);
+
+        if (returnedUser == null || user.password != returnedUser.password)
+        {
+            LoginMesssage = "Problem logging as guest";
+            return;
+        }
+        if (returnedUser.login != null)
+        {
+            UserSession userSession = new UserSession();
+            userSession.login = returnedUser.login;
+            userSession.role = returnedUser.role;
+
+            await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(userSession);
+            NavigationManager.NavigateTo("/Home");
+        }
+    }
+
+    private async Task ValidateUser()
+    {
+
+        var returnedUser = await userAccountService.GetByLogin(user);
+
+        if (returnedUser == null || user.password != returnedUser.password)
+        {
+            LoginMesssage = "Invalid username or password";
+            return;
+        }
+        if (returnedUser.login != null)
+        {
+            UserSession userSession = new UserSession();
+            userSession.login = returnedUser.login;
+            userSession.role = returnedUser.role;
+
+            await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(userSession);
+            NavigationManager.NavigateTo("/Home");
+        }
+    }
+
+}

@@ -1,15 +1,24 @@
-﻿@inherits LayoutComponentBase
+﻿@using CV_RibeiroChristophe.Authentication
+@inherits LayoutComponentBase
+@inject NavigationManager NavigationManager
+@inject AuthenticationStateProvider AuthenticationStateProvider
 
-<PageTitle>CV Ribeiro Da Silva Christophe</PageTitle>
+<PageTitle>Ribeiro Da Silva Christophe</PageTitle>
 
 <div class="page">
-    <div class="sidebar" style="">
+    <div class="sidebar" style="width:auto">
         <NavMenu />
     </div>
 
     <main>
         <div class="top-row justify-content-center">
             <h1> .Net Developer </h1>
+
+            <AuthorizeView>
+                <div class="top-row px-4">
+                    <a @onclick="(() => Logout())">Logout</a>
+                </div>
+            </AuthorizeView>
         </div>
 
         <article class="content px-4">
@@ -17,3 +26,14 @@
         </article>
     </main>
 </div>
+
+
+
+@code {
+    public async Task Logout()
+    {
+        var customAuthenticationProvider = (CustomAuthenticationStateProvider)AuthenticationStateProvider;
+        await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(null);
+        NavigationManager.NavigateTo("", true);
+    }
+}
