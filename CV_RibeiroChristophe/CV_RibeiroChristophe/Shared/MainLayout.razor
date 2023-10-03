@@ -14,9 +14,9 @@
         <div class="top-row justify-content-center">
             <h1> .Net Developer </h1>
 
-            <AuthorizeView>
-                <div class="top-row px-4">
-                    <a @onclick="(() => Logout())">Logout</a>
+            <AuthorizeView Roles="admin,guest">
+                <div class="top-row" style="position: fixed;margin-right: 5%;right: 0;">
+                    <a href="javascript:void(0)" @onclick="(() => Logout())">Logout</a>
                 </div>
             </AuthorizeView>
         </div>

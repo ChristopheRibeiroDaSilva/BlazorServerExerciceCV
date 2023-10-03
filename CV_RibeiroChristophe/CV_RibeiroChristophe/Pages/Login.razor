@@ -39,24 +39,32 @@
         </EditForm>
     </div>
 </div>
+
+
 @code {
     public UserAccount user = new UserAccount();
     public string LoginMesssage { get; set; }
 
+    [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
 
+    //Vérification que personne est déjà connecté sinon redirection vers /Home
     protected override async Task OnInitializedAsync()
     {
         try{
-            var customAuthenticationProvider = (CustomAuthenticationStateProvider)AuthenticationStateProvider;
-            await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(null);
+
+            var authState = await AuthStat;
+            if (authState.User.Identity.IsAuthenticated)
+            {
+                NavigationManager.NavigateTo("/Home", true);
+            }
         }
         catch
         {
-            
         }
-
     }
 
+
+    //Connection en tant qu'invité
     private async void LogAsGuest()
     {
         user.login = "guest";
@@ -80,6 +88,7 @@
         }
     }
 
+    //Connection aveclogin et password entrés
     private async Task ValidateUser()
     {
 
