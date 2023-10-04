@@ -12,19 +12,27 @@
 
     <main>
         <div class="top-row justify-content-center">
-            <h1> .Net Developer </h1>
+            <div class="top-row-center" >
+                <h1> .Net Developer </h1>
+            </div>
 
             <AuthorizeView Roles="admin,guest">
                 <Authorized>
-                    <div class="top-row" style="position: fixed;margin-right: 5%;right: 0;">
+                    <div class="top-row-right" style="position: absolute;margin-right: 5%;right: 0;">
                         <NavLink href="javascript:void(0)" @onclick="(() => Logout())">Logout</NavLink>
                     </div>
-                    <div class="top-row" style="position: absolute;left: 0;">
-                        <span>Loged as @context.User.Identity.Name</span>
+                    <div class="top-row-left" style="position: absolute;margin-left: 2%;left: 0;">
+                        @if(@context.User.Identity.Name == "admin")
+                        {
+                            <span> Loged as @context.User.Identity.Name</span>
+                        }
+                        else{
+                            <span>Here as @context.User.Identity.Name</span>
+                        }
                     </div>
                 </Authorized>
                 <NotAuthorized>
-                    <div class="top-row" style="position: fixed;margin-right: 5%;right: 0;">
+                    <div class="top-row-right" style="position: fixed;margin-right: 5%;right: 0;">
                         <NavLink href="javascript:void(0)" @onclick="(() => Login())">Log In</NavLink>
                     </div>
                 </NotAuthorized>
@@ -47,11 +55,11 @@
     {
         var customAuthenticationProvider = (CustomAuthenticationStateProvider)AuthenticationStateProvider;
         await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(null);
-        NavigationManager.NavigateTo("", true);
+        NavigationManager.NavigateTo("");
     }
     public void Login()
     {
        
-        NavigationManager.NavigateTo("", true);
+        NavigationManager.NavigateTo("");
     }
 }

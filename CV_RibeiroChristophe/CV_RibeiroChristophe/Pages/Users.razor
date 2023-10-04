@@ -1,0 +1,17 @@
+﻿@page "/Users"
+
+@attribute [Authorize(Roles = "admin")]
+
+@using CV_RibeiroChristophe.Data
+@using CV_RibeiroChristophe.Authentication
+@using System.Security.Claims
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject IUserAccountService userAccountService
+
+<h3>Users</h3>
+
+@code {
+
+}

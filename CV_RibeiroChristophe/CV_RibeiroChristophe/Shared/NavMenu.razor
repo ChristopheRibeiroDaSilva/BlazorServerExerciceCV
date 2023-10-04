@@ -12,21 +12,30 @@
 
         <AuthorizeView Roles="admin,guest">
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="Home" Match="NavLinkMatch.All">
-                <span class="oi oi-home" aria-hidden="true"></span> About Me
+                <NavLink class="nav-link" href="Aboutme" Match="NavLinkMatch.All">
+                    <span class="oi oi-person" aria-hidden="true"></span> About Me
             </NavLink>
         </div>
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="counter">
-                <span class="oi oi-plus" aria-hidden="true"></span> Counter
+                <NavLink class="nav-link" href="WorkExperience" Match="NavLinkMatch.All">
+                    <span class="oi oi-briefcase" aria-hidden="true"></span> Work Experience
+            </NavLink>
+        </div>
+        <div class="nav-item px-3">
+                <NavLink class="nav-link" href="Degree" Match="NavLinkMatch.All">
+                    <span style="content: url('https://api.iconify.design/icon-park-outline/degree-hat.svg?color=white'); width: 1.7rem; margin-right:7px" ></span> Degree
+            </NavLink>
+        </div><div class="nav-item px-3">
+                <NavLink class="nav-link" href="Contactme" Match="NavLinkMatch.All">
+                    <span class="oi oi-envelope-closed" aria-hidden="true"></span> Contact me
             </NavLink>
         </div>
         </AuthorizeView>
 
         <AuthorizeView Roles="admin">
         <div class="nav-item px-3">
-            <NavLink class="nav-link" href="fetchdata">
-                <span class="oi oi-list-rich" aria-hidden="true"></span> Fetch data
+            <NavLink class="nav-link" href="/Home">
+                <span class="oi oi-list-rich" aria-hidden="true"></span> Users
             </NavLink>
         </div>
         </AuthorizeView>

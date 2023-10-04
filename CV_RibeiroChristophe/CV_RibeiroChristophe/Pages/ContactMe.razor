@@ -1,0 +1,16 @@
+﻿@page "/Contactme"
+
+@attribute [Authorize(Roles = "admin,guest")]
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+
+<PageTitle>About Me</PageTitle>
+
+<h1>Contact me</h1>
+
+Welcome to your new app.
+
+
+@code {
+}

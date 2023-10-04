@@ -33,7 +33,7 @@
             <div class="col-12 row" style="margin-left: initial">
                 <span class="col"></span>
                 <input type="submit" class="form-control col-6 btn btn-primary" value="Login" />
-                <a @onclick="LogAsGuest" style="margin-top: 5px" href="javascript:void(0)" class="col">Log as Guest</a>
+                <a @onclick="LogAsGuest" style="margin-top: 5px" href="javascript:void(0)" class="col">Continue as Guest</a>
             </div>
             <br />
             <div class="col row" style="font-weight:bold">
@@ -58,7 +58,7 @@
             var authState = await AuthStat;
             if (authState.User.Identity.IsAuthenticated)
             {
-                NavigationManager.NavigateTo("/Home", true);
+                NavigationManager.NavigateTo("/Aboutme");
             }
         }
         catch
@@ -87,7 +87,7 @@
             userSession.role = returnedUser.role;
 
             await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(userSession);
-            NavigationManager.NavigateTo("/Home");
+            NavigationManager.NavigateTo("/Aboutme");
         }
     }
 
@@ -109,7 +109,7 @@
             userSession.role = returnedUser.role;
 
             await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(userSession);
-            NavigationManager.NavigateTo("/Home");
+            NavigationManager.NavigateTo("/Aboutme");
         }
     }
 
