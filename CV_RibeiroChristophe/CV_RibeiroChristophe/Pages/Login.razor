@@ -1,8 +1,11 @@
-﻿@page "/"
+﻿@layout NoLayout
+
+@page "/"
+
 @using CV_RibeiroChristophe.Data
 @using CV_RibeiroChristophe.Authentication
 @using System.Security.Claims
-@layout NoLayout
+
 @inject AuthenticationStateProvider AuthenticationStateProvider
 @inject NavigationManager NavigationManager
 @inject IJSRuntime jsRunTime

@@ -19,6 +19,9 @@
                     <div class="top-row" style="position: fixed;margin-right: 5%;right: 0;">
                         <NavLink href="javascript:void(0)" @onclick="(() => Logout())">Logout</NavLink>
                     </div>
+                    <div class="top-row" style="position: absolute;left: 0;">
+                        <span>Loged as @context.User.Identity.Name</span>
+                    </div>
                 </Authorized>
                 <NotAuthorized>
                     <div class="top-row" style="position: fixed;margin-right: 5%;right: 0;">
@@ -39,7 +42,6 @@
 @code {
 
     [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
-
 
     public async Task Logout()
     {
