@@ -2,6 +2,6 @@
 {
     public interface IUserAccountService
     {
-        public Task<UserAccount> GetByLogin(UserAccount useraccount);
+        public Task<UserAccount?> GetByLogin(string userLogin);
     }
 }

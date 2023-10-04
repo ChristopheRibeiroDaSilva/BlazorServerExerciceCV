@@ -20,20 +20,20 @@
                 <br />
             </div>
             <div class="col-12 row" style="margin-left: initial;">
-                <input class="form-control col-12" style="text-align: center;" @bind="user.login" placeholder="login" />
+                <input class="form-control col" style="text-align: center;" @bind="user.login" placeholder="login" />
             </div>
             <br />
             <div class="col-12 row" style="margin-left: initial;">
-                <input type="password" class="form-control col-12" style="text-align: center;" @bind="user.password" placeholder="password" />
+                <input type="password" class="form-control col" style="text-align: center;" @bind="user.password" placeholder="password" />
             </div>
             <br />
-            <div class="col-12 row">
-                <span class="col-12"></span>
+            <div class="col-12 row" style="margin-left: initial">
+                <span class="col"></span>
                 <input type="submit" class="form-control col-6 btn btn-primary" value="Login" />
                 <a @onclick="LogAsGuest" style="margin-top: 5px" href="javascript:void(0)" class="col">Log as Guest</a>
             </div>
             <br />
-            <div class="col-12 row" style="text-align:left; font-weight:bold">
+            <div class="col row" style="font-weight:bold">
                 <span class="col-12" style="color: red; text-align:center;">@LoginMesssage</span>
             </div>
         </EditForm>
@@ -70,7 +70,7 @@
         user.login = "guest";
         user.password = "guest";
 
-        var returnedUser = await userAccountService.GetByLogin(user);
+        var returnedUser = await userAccountService.GetByLogin(user.login);
 
         if (returnedUser == null || user.password != returnedUser.password)
         {
@@ -92,7 +92,7 @@
     private async Task ValidateUser()
     {
 
-        var returnedUser = await userAccountService.GetByLogin(user);
+        var returnedUser = await userAccountService.GetByLogin(user.login);
 
         if (returnedUser == null || user.password != returnedUser.password)
         {

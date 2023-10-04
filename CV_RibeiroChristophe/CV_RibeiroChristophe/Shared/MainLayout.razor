@@ -15,9 +15,16 @@
             <h1> .Net Developer </h1>
 
             <AuthorizeView Roles="admin,guest">
-                <div class="top-row" style="position: fixed;margin-right: 5%;right: 0;">
-                    <a href="javascript:void(0)" @onclick="(() => Logout())">Logout</a>
-                </div>
+                <Authorized>
+                    <div class="top-row" style="position: fixed;margin-right: 5%;right: 0;">
+                        <NavLink href="javascript:void(0)" @onclick="(() => Logout())">Logout</NavLink>
+                    </div>
+                </Authorized>
+                <NotAuthorized>
+                    <div class="top-row" style="position: fixed;margin-right: 5%;right: 0;">
+                        <NavLink href="javascript:void(0)" @onclick="(() => Login())">Log In</NavLink>
+                    </div>
+                </NotAuthorized>
             </AuthorizeView>
         </div>
 
@@ -30,10 +37,19 @@
 
 
 @code {
+
+    [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
+
+
     public async Task Logout()
     {
         var customAuthenticationProvider = (CustomAuthenticationStateProvider)AuthenticationStateProvider;
         await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(null);
+        NavigationManager.NavigateTo("", true);
+    }
+    public void Login()
+    {
+       
         NavigationManager.NavigateTo("", true);
     }
 }
