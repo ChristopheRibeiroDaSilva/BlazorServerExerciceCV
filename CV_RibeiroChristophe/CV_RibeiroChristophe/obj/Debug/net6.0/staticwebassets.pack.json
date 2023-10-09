@@ -5,6 +5,14 @@
       "PackagePath": "staticwebassets\\CV_RibeiroChristophe.bundle.scp.css"
     },
     {
+      "Id": "C:\\Users\\Ribeiro\\Desktop\\Blazor_CV\\CV_RibeiroChristophe\\CV_RibeiroChristophe\\wwwroot\\FileContent\\CV english - RIBEIRO DA SILVA Christophe.pdf",
+      "PackagePath": "staticwebassets\\FileContent\\CV english - RIBEIRO DA SILVA Christophe.pdf"
+    },
+    {
+      "Id": "C:\\Users\\Ribeiro\\Desktop\\Blazor_CV\\CV_RibeiroChristophe\\CV_RibeiroChristophe\\wwwroot\\FileContent\\CV fr - RIBEIRO DA SILVA CHRISTOPHE.pdf",
+      "PackagePath": "staticwebassets\\FileContent\\CV fr - RIBEIRO DA SILVA CHRISTOPHE.pdf"
+    },
+    {
       "Id": "C:\\Users\\Ribeiro\\Desktop\\Blazor_CV\\CV_RibeiroChristophe\\CV_RibeiroChristophe\\wwwroot\\css\\bootstrap\\bootstrap.min.css",
       "PackagePath": "staticwebassets\\css\\bootstrap\\bootstrap.min.css"
     },

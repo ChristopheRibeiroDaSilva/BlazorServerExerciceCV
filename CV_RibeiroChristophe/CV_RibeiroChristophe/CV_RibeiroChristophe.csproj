@@ -6,4 +6,9 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <None Include="wwwroot\FileContent\CV english - RIBEIRO DA SILVA Christophe.pdf" />
+    <None Include="wwwroot\FileContent\CV fr - RIBEIRO DA SILVA CHRISTOPHE.pdf" />
+  </ItemGroup>
+
 </Project>

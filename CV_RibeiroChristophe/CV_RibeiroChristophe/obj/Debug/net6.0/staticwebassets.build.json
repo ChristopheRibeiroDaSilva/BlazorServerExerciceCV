@@ -1,6 +1,6 @@
 {
   "Version": 1,
-  "Hash": "QQNtJC4Nv5oG21wc6TpPw5WLq9n3v0WVWdJBOm29cys=",
+  "Hash": "YHRlRbNUhiyHO5xdo28bVVekWTKOthK1iDYCO5UOqzA=",
   "Source": "CV_RibeiroChristophe",
   "BasePath": "_content/CV_RibeiroChristophe",
   "Mode": "Default",
@@ -270,6 +270,40 @@
       "CopyToOutputDirectory": "Never",
       "CopyToPublishDirectory": "PreserveNewest",
       "OriginalItemSpec": "wwwroot\\favicon.ico"
+    },
+    {
+      "Identity": "C:\\Users\\Ribeiro\\Desktop\\Blazor_CV\\CV_RibeiroChristophe\\CV_RibeiroChristophe\\wwwroot\\FileContent\\CV english - RIBEIRO DA SILVA Christophe.pdf",
+      "SourceId": "CV_RibeiroChristophe",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Ribeiro\\Desktop\\Blazor_CV\\CV_RibeiroChristophe\\CV_RibeiroChristophe\\wwwroot\\",
+      "BasePath": "_content/CV_RibeiroChristophe",
+      "RelativePath": "FileContent/CV english - RIBEIRO DA SILVA Christophe.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\FileContent\\CV english - RIBEIRO DA SILVA Christophe.pdf"
+    },
+    {
+      "Identity": "C:\\Users\\Ribeiro\\Desktop\\Blazor_CV\\CV_RibeiroChristophe\\CV_RibeiroChristophe\\wwwroot\\FileContent\\CV fr - RIBEIRO DA SILVA CHRISTOPHE.pdf",
+      "SourceId": "CV_RibeiroChristophe",
+      "SourceType": "Discovered",
+      "ContentRoot": "C:\\Users\\Ribeiro\\Desktop\\Blazor_CV\\CV_RibeiroChristophe\\CV_RibeiroChristophe\\wwwroot\\",
+      "BasePath": "_content/CV_RibeiroChristophe",
+      "RelativePath": "FileContent/CV fr - RIBEIRO DA SILVA CHRISTOPHE.pdf",
+      "AssetKind": "All",
+      "AssetMode": "All",
+      "AssetRole": "Primary",
+      "RelatedAsset": "",
+      "AssetTraitName": "",
+      "AssetTraitValue": "",
+      "CopyToOutputDirectory": "Never",
+      "CopyToPublishDirectory": "PreserveNewest",
+      "OriginalItemSpec": "wwwroot\\FileContent\\CV fr - RIBEIRO DA SILVA CHRISTOPHE.pdf"
     }
   ]
 }

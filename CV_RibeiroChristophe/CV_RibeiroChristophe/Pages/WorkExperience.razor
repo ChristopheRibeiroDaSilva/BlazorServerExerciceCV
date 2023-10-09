@@ -2,15 +2,122 @@
 
 @attribute [Authorize(Roles = "admin,guest")]
 
-@inject AuthenticationStateProvider AuthenticationStateProvider
-@inject NavigationManager NavigationManager
+@using CV_RibeiroChristophe.Data
+
+@inject IJSRuntime JS
 
 <PageTitle>Work Experience</PageTitle>
 
-<h1>Work Experience</h1>
+<div style="display: flex">
+	<div style="width: 100%">
+		<h2>Developer</h2>
+		<h5 style="font-style:italic">Intellicast | Oct. 2018 - June 2022</h5>
+		<p>
+			Development, bug fix et maintenance on several projects.
+			Web application .NET core MVC, using WEB API and PostGreSQL database. Android Mobile App to manage adds on screens in shops.
+		</p>
+		<p>
+			Languages used :
+		</p>
+		<ul>
+			<li>.NET / .NET core / ASP.NET MVC</li>
+			<li>Java</li>
+			<li>HTML/CSS/JS</li>
+			<li>SQL</li>
+			<li>BASH</li>
+			<li>PHP</li>
+		</ul>
+		<p>
+			Frameworks used :
+		</p>
+		<ul>
+			<li>JQuery</li>
+			<li>Bootstrap</li>
+			<li>EntityFramework</li>
+		</ul>
+	</div>
+	<br />
+	<div style="width: 100%">
+		<h2>C++ Developer</h2>
+		<h5 style="font-style:italic">Internship Intellicast (Shangai, Chine)| Sept. 2017 - Fév. 2018</h5>
+		<p>
+			Development of a facial recognition module to obtain statistics on the influx ofpeople in stores.
+		</p>
+		<p>
+		Language used :	
+		</p>
+		<ul>
+			<li>
+				C++ (OpenCV library)
+			</li>
+		</ul>
+	</div>
 
-Welcome to your new app.
+	<div style="width: 100%">
+		<h2>Personnal work experience</h2>
+		<h5 style="font-style:italic">Own CV on web| 28 Sept. 2023 - 13 Oct. 2023</h5>
+		<p>
+			Self training project on the blazor framework.
+			The web application allows logging in, and depending on the user role, pages and functions are available.
+			The project is the one you are using right now and hosted on GitHub.
+		</p>
+		<p>
+			Language used :
+		</p>
+		<ul>
+			<li>
+				.Net core MVC
+			</li>
+		</ul><p>
+			Frameworks used :
+		</p>
+		<ul>
+			<li>
+				Blazor
+			</li>
+			<li>
+				Entity Framework (On version 2 of the application, using MS SQL Server)
+			</li>
+		</ul>
+	</div>
+
+</div>
+<br />
+<br />
+<br />
+<div style ="display: flex">
+	<p> If you want to download my full Curriculum Vitae : </p>
+	<br />
+	<a class="form-control btn btn-primary" style="width: 150px;margin-left: 10px;" @onclick="DownloadENCV">
+		English Version
+	</a>
+	<a class="form-control btn btn-primary" style="width: 150px;margin-left: 10px;" @onclick="DownloadFRCV">
+		French Version
+	</a>
+</div>
+
+<script>
+	window.triggerFileDownload = (fileName, url) => {
+		const anchorElement = document.createElement('a');
+		anchorElement.href = url;
+		anchorElement.download = fileName ?? '';
+		anchorElement.click();
+		anchorElement.remove();
+	}
+</script>
 
 
 @code {
+	private async Task DownloadENCV()
+	{
+		var fileName = "CV english - RIBEIRO DA SILVA Christophe.pdf";
+		var fileURL = "http://localhost:5176/FileContent/CV english - RIBEIRO DA SILVA Christophe.pdf";
+		await JS.InvokeVoidAsync("triggerFileDownload", fileName, fileURL);
+	}
+	private async Task DownloadFRCV()
+	{
+		var fileName = "CV fr - RIBEIRO DA SILVA CHRISTOPHE.pdf";
+		var fileURL = "http://localhost:5176/FileContent/CV fr - RIBEIRO DA SILVA CHRISTOPHE.pdf";
+		await JS.InvokeVoidAsync("triggerFileDownload", fileName, fileURL);
+	}
 }
