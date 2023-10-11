@@ -1,2 +1,3 @@
 # BlazorServerExerciceCV
-Blazor Server Exercice Showing my CV (amind can modify)
+This is a project excercise that allows me to learn blazor framework, Authorization/Authentication layer, train and develop my git/github knowledge and also to show to people who are interested in my profile what i can do (and at the same time my CV).
+There is a second version, using this time a SQL server database.
