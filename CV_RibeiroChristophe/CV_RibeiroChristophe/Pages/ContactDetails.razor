@@ -1,0 +1,70 @@
+﻿@page "/Contactdetails"
+
+@attribute [Authorize(Roles = "admin,guest")]
+
+@using CV_RibeiroChristophe.Data
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+
+@inject IJSRuntime JS
+
+
+<PageTitle>Contact Me</PageTitle>
+<br />
+<br />
+<div>
+	<span style="content: url('https://api.iconify.design/game-icons/position-marker.svg?color=%23151e5e');width: 2rem; vertical-align: middle" aria-hidden="true"></span> 5400-555 Chaves, Vila Real, Portugal
+</div>
+<br />
+<div>
+	<span style="content: url('https://api.iconify.design/bxs/phone.svg?color=%23151e5e'); width: 2rem; vertical-align: middle" aria-hidden="true"></span> +33 6 03 83 78 74
+</div>
+<br />
+<div>
+	<span style="content: url('https://api.iconify.design/cib/mail-ru.svg?color=%23151e5e'); width: 30px; vertical-align: middle" aria-hidden="true">
+		
+	</span> <a href="mailto:christophe414@gmail.com">
+		christophe414@gmail.com
+	</a>
+</div>
+<br />
+<br />
+<div style="display: flex">
+	<div style="display: table">
+		<p style="display: table-cell; vertical-align: middle"> My full Curriculum Vitae : </p>
+	</div>
+	<br />
+	<a class="form-control btn btn-primary" style="width: 150px;margin-left: 10px;" @onclick="DownloadENCV">
+		English Version
+	</a>
+	<a class="form-control btn btn-primary" style="width: 150px;margin-left: 10px;" @onclick="DownloadFRCV">
+		French Version
+	</a>
+</div>
+
+<script>
+	window.triggerFileDownload = (fileName, url) => {
+		const anchorElement = document.createElement('a');
+		anchorElement.href = url;
+		anchorElement.download = fileName ?? '';
+		anchorElement.click();
+		anchorElement.remove();
+	}
+</script>
+
+@code {
+
+	private async Task DownloadENCV()
+	{
+		var fileName = "CV english - RIBEIRO DA SILVA Christophe.pdf";
+		var fileURL = "http://localhost:5176/FileContent/CV english - RIBEIRO DA SILVA Christophe.pdf";
+		await JS.InvokeVoidAsync("triggerFileDownload", fileName, fileURL);
+	}
+	private async Task DownloadFRCV()
+	{
+		var fileName = "CV fr - RIBEIRO DA SILVA CHRISTOPHE.pdf";
+		var fileURL = "http://localhost:5176/FileContent/CV fr - RIBEIRO DA SILVA CHRISTOPHE.pdf";
+		await JS.InvokeVoidAsync("triggerFileDownload", fileName, fileURL);
+	}
+}
