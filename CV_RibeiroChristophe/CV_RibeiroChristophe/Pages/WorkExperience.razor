@@ -4,8 +4,6 @@
 
 @using CV_RibeiroChristophe.Data
 
-@inject IJSRuntime JS
-
 <PageTitle>Work Experience</PageTitle>
 
 <div style="display: flex">
@@ -84,45 +82,4 @@
 </div>
 <br />
 <br />
-<p>Or contact me :</p>
-<br />
-<br />
-<br />
-<div style ="display: flex">
-	<div style="display: table">
-		<p style="display: table-cell; vertical-align: middle"> If you want to download my full Curriculum Vitae : </p>
-	</div>
-	<br />
-	<a class="form-control btn btn-primary" style="width: 150px;margin-left: 10px;" @onclick="DownloadENCV">
-		English Version
-	</a>
-	<a class="form-control btn btn-primary" style="width: 150px;margin-left: 10px;" @onclick="DownloadFRCV">
-		French Version
-	</a>
-</div>
-
-<script>
-	window.triggerFileDownload = (fileName, url) => {
-		const anchorElement = document.createElement('a');
-		anchorElement.href = url;
-		anchorElement.download = fileName ?? '';
-		anchorElement.click();
-		anchorElement.remove();
-	}
-</script>
-
-
-@code {
-	private async Task DownloadENCV()
-	{
-		var fileName = "CV english - RIBEIRO DA SILVA Christophe.pdf";
-		var fileURL = "http://localhost:5176/FileContent/CV english - RIBEIRO DA SILVA Christophe.pdf";
-		await JS.InvokeVoidAsync("triggerFileDownload", fileName, fileURL);
-	}
-	private async Task DownloadFRCV()
-	{
-		var fileName = "CV fr - RIBEIRO DA SILVA CHRISTOPHE.pdf";
-		var fileURL = "http://localhost:5176/FileContent/CV fr - RIBEIRO DA SILVA CHRISTOPHE.pdf";
-		await JS.InvokeVoidAsync("triggerFileDownload", fileName, fileURL);
-	}
-}
+<DownloadCV></DownloadCV>
