@@ -46,7 +46,7 @@
 
 @code {
     public UserAccount user = new UserAccount();
-    public string LoginMesssage { get; set; }
+    public string? LoginMesssage { get; set; }
 
     [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
 
@@ -68,7 +68,7 @@
 
 
     //Connection en tant qu'invité
-    private async void LogAsGuest()
+    private async Task LogAsGuest()
     {
         user.login = "guest";
         user.password = "guest";

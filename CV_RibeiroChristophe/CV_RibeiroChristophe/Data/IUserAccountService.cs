@@ -2,8 +2,9 @@
 {
     public interface IUserAccountService
     {
-		public Task<UserAccount?> GetByLogin(string userLogin);
-        public bool AddUser(string userLogin, string userPassword, string userRole);
+        public Task<UserAccount> GetByLogin(string userLogin);
+        public Task<UserAccount> GetUserById(int? id);
+        public Task<bool> AddUser(UserAccount user);
         public Task<List<UserAccount>> GetListUser();
     }
 }

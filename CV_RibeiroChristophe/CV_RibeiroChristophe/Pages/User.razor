@@ -1,0 +1,112 @@
+﻿@page "/NewUser"
+@page "/User/{id:int}"
+
+@attribute [Authorize(Roles = "admin")]
+
+@using CV_RibeiroChristophe.Data
+@using CV_RibeiroChristophe.Authentication
+@using System.Security.Claims
+
+@inject AuthenticationStateProvider AuthenticationStateProvider
+@inject NavigationManager NavigationManager
+@inject IUserAccountService userAccountService
+
+@if (Id == null)
+{
+    <PageTitle>Create a new User</PageTitle>
+    <h3>Create a new User</h3>
+}
+else
+{
+    <PageTitle>Edit @user.login</PageTitle>
+    <h3>Edit @user.login</h3>
+}
+
+<EditForm Model="user" OnSubmit="HandleSubmit">
+    <div>
+        <label for="login">Login</label>
+        <InputText id="login" @bind-Value="user.login" class="form-control"></InputText>
+    </div>
+    <div>
+        <label for="password">Password</label>
+        <InputText id="password" @bind-Value="user.password" class="form-control"></InputText>
+    </div>
+    <div>
+        <label for="role" >Role</label><br />
+        <InputSelect @bind-Value="@roleSelected" class="form-select">
+            <option value="0">guest</option>
+            <option value="1">admin</option>
+        </InputSelect>
+    </div>
+    <br />
+    <button type="submit" class="btn btn-primary">@btnText</button>
+    <br />
+    @if (Id != null)
+    {
+        <button type="button" class="btn btn-danger" @onclick="DeleteHero">Delete Hero</button>
+    }
+    <div class="col row" style="font-weight:bold">
+        <span class="col-12" style="color: red; text-align:center;">@LoginMesssage</span>
+    </div>
+</EditForm>
+
+@code {
+
+    [Parameter]
+    public int? Id { get; set; }
+    public string? LoginMesssage { get; set; }
+    string btnText = string.Empty;
+
+    UserAccount user = new UserAccount();
+    int roleSelected;
+
+    protected override async Task OnInitializedAsync()
+    {
+        btnText = Id == null ? "Save New User" : "Update User";
+    }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        if(Id != null)
+            user = await userAccountService.GetUserById(Id);
+    }
+
+
+    async Task HandleSubmit()
+    {
+        if (Id == null)
+        {
+            if (roleSelected == 1)
+                user.role = "admin";
+            else
+                user.role = "guest";
+
+            var response = await userAccountService.AddUser(user);
+
+            if (response == true)
+            {
+                NavigationManager.NavigateTo("/Users");
+            }
+            else
+                LoginMesssage = "Problem Creating user";
+
+        }
+        else
+        {
+            //await userAccountService.UpdateUser(user);
+            /*if (response == true)
+            {
+                NavigationManager.NavigateTo("/Users");
+            }
+            else
+                LoginMesssage = "Problem logging as guest";
+                */
+        }
+    }
+
+    async Task DeleteHero()
+    {
+        
+    }
+
+}

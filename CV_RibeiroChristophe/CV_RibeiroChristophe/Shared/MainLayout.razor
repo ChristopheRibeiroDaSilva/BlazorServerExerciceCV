@@ -55,11 +55,11 @@
     {
         var customAuthenticationProvider = (CustomAuthenticationStateProvider)AuthenticationStateProvider;
         await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(null);
-        NavigationManager.NavigateTo("");
+        NavigationManager.NavigateTo("/");
     }
     public void Login()
     {
        
-        NavigationManager.NavigateTo("");
+        NavigationManager.NavigateTo("/");
     }
 }

@@ -2,57 +2,85 @@
 {
 	public class UserAccountService : IUserAccountService
 	{
-		public List<UserAccount> ListUser;
+        public List<UserAccount> ListUser = new List<UserAccount>();
 
-		public UserAccountService() {
+        public UserAccountService() {
 
-			ListUser = new List<UserAccount>
+			ListUser.Add(new UserAccount
 			{
-				new UserAccount{
-					Id = 1,
+				Id = 1,
 				login = "admin",
 				password = "admin",
-				role = "admin"},
-				new UserAccount
-				{
-					Id = 2,
-					login = "guest",
-					password = "guest",
-					role = "guest"
-				}
-			};
-		}
+                role = "admin"
+            });
 
-		public async Task<UserAccount?> GetByLogin(string userLogin)
+			ListUser.Add(new UserAccount
+			{
+				Id = 2,
+				login = "guest",
+				password = "guest",
+				role = "guest"
+            });
+            
+        }
+
+
+        public Task<UserAccount> GetByLogin(string userLogin)
+        {
+            UserAccount? returnUserAccount;
+
+            try
+            {
+                returnUserAccount = ListUser.FirstOrDefault(u => u.login == userLogin);
+                if (returnUserAccount == null)
+                {
+                    returnUserAccount = new UserAccount();
+
+                    return Task.FromResult(returnUserAccount);
+                }
+                return Task.FromResult(returnUserAccount);
+            }
+            catch (Exception)
+            {
+                returnUserAccount = new UserAccount();
+                return Task.FromResult(returnUserAccount);
+            }
+        }
+
+        public Task<UserAccount> GetUserById(int? id)
+        {
+            UserAccount? returnUserAccount;
+
+            try
+            {
+                returnUserAccount = ListUser.FirstOrDefault(u => u.Id == id);
+                if (returnUserAccount == null)
+                {
+                    returnUserAccount = new UserAccount();
+
+                    return Task.FromResult(returnUserAccount);
+                }
+                return Task.FromResult(returnUserAccount);
+            }
+            catch (Exception)
+            {
+                returnUserAccount = new UserAccount();
+                return Task.FromResult(returnUserAccount);
+            }
+        }
+
+        public Task<bool> AddUser(UserAccount user)
 		{
 			try
 			{
-				UserAccount returnUserAccount = ListUser.FirstOrDefault(u => u.login == userLogin);
-				return returnUserAccount;
+                user.Id = ListUser.Count + 1;
+				ListUser.Add(user);
+
+				return Task.FromResult(true);
 			}
 			catch (Exception ex)
 			{
-				return null;
-			}
-		}
-
-		public bool AddUser(string userLogin, string userPassword, string userRole)
-		{
-			try
-			{
-				UserAccount newUser = new UserAccount();
-				newUser.Id = ListUser.Count + 1;
-				newUser.login = userLogin;
-				newUser.password = userPassword;
-				newUser.role = userRole;
-
-				ListUser.Add(newUser);
-
-				return true;
-			}
-			catch (Exception ex)
-			{
-				return false;
+				return Task.FromResult(false);
 			}
 		}
 
@@ -68,8 +96,9 @@
 			}
 			catch
 			{
-				return null;
+                ListUsers.Clear();
 			}
+            return Task.FromResult(ListUsers);
         }
 
     }

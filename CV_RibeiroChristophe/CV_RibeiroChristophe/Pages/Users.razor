@@ -10,6 +10,8 @@
 @inject NavigationManager NavigationManager
 @inject IUserAccountService userAccountService
 
+<PageTitle>Users List</PageTitle>
+
 
 @if (ListUsers == null)
 {
@@ -19,11 +21,14 @@ else
 {
     <table class="table">
         <thead>
+            <tr><th><button @onclick="CreateNewUser" class="btn btn-primary">Add User</button></th></tr>
             <tr>
                 <th>ID</th>
                 <th>Login</th>
                 <th>Password</th>
                 <th>Role</th>
+                <th>Edit</th>
+                <th>Delete</th>
             </tr>
         </thead>
         <tbody>
@@ -34,6 +39,7 @@ else
                     <td>@user.login</td>
                     <td>@user.password</td>
                     <td>@user.role</td>
+                    <td><button class="btn btn-primary" @onclick="(() => EditUser(user.Id))"><i class="oi oi-pencil"></i></button></td>
                 </tr>
             }
         </tbody>
@@ -42,11 +48,20 @@ else
 
 @code {
 
-    private List<UserAccount> ListUsers;
+    private List<UserAccount>? ListUsers;
 
     protected override async Task OnInitializedAsync()
     {
         ListUsers = await userAccountService.GetListUser();
     }
 
+    void CreateNewUser()
+    {
+        NavigationManager.NavigateTo("/NewUser");
+    }
+
+    void EditUser(int id)
+    {
+        NavigationManager.NavigateTo($"User/{id}");
+    }
 }
