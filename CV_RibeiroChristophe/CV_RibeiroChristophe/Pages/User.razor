@@ -33,9 +33,12 @@ else
     </div>
     <div>
         <label for="role" >Role</label><br />
-        <InputSelect @bind-Value="@roleSelected" class="form-select">
-            <option value="0">guest</option>
-            <option value="1">admin</option>
+        <InputSelect @bind-Value="@user.roleId" class="form-select">
+            <option value="0">Choose a role</option>
+
+            @foreach (var role in ListRoles){
+                <option value="@role.Id">@role.name</option>
+            }
         </InputSelect>
     </div>
     <br />
@@ -57,6 +60,9 @@ else
     public string? LoginMesssage { get; set; }
     string btnText = string.Empty;
 
+    public List<Role> ListRoles = new List<Role>();
+
+
     UserAccount user = new UserAccount();
     int roleSelected;
 
@@ -69,6 +75,18 @@ else
     {
         if(Id != null)
             user = await userAccountService.GetUserById(Id);
+
+        ListRoles.Add(new Role
+            {
+                Id = 1,
+                name = "admin"
+            });
+
+        ListRoles.Add(new Role
+            {
+                Id = 2,
+                name = "guest"
+            });
     }
 
 
@@ -76,10 +94,10 @@ else
     {
         if (Id == null)
         {
-            if (roleSelected == 1)
-                user.role = "admin";
-            else
-                user.role = "guest";
+            if (roleSelected == 0){
+                LoginMesssage = "Choose a role";
+                return;
+            }
 
             var response = await userAccountService.AddUser(user);
 

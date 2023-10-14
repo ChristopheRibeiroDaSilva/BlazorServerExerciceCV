@@ -84,7 +84,7 @@
         {
             UserSession userSession = new UserSession();
             userSession.login = returnedUser.login;
-            userSession.role = returnedUser.role;
+            userSession.role = returnedUser.roleId;
 
             await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(userSession);
             NavigationManager.NavigateTo("/Aboutme");
@@ -106,7 +106,7 @@
         {
             UserSession userSession = new UserSession();
             userSession.login = returnedUser.login;
-            userSession.role = returnedUser.role;
+            userSession.role = returnedUser.roleId;
 
             await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(userSession);
             NavigationManager.NavigateTo("/Aboutme");

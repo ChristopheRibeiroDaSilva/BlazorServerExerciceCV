@@ -3,6 +3,7 @@
 	public class UserAccountService : IUserAccountService
 	{
         public List<UserAccount> ListUser = new List<UserAccount>();
+        public List<Role> ListRole = new List<Role>();
 
         public UserAccountService() {
 
@@ -11,19 +12,30 @@
 				Id = 1,
 				login = "admin",
 				password = "admin",
-                role = "admin"
+                roleId = 1
             });
 
-			ListUser.Add(new UserAccount
-			{
-				Id = 2,
-				login = "guest",
-				password = "guest",
-				role = "guest"
+            ListUser.Add(new UserAccount
+            {
+                Id = 2,
+                login = "guest",
+                password = "guest",
+                roleId = 2
             });
-            
+
+            ListRole.Add(new Role
+            {
+                Id = 1,
+                name = "admin"
+            });
+
+            ListRole.Add(new Role
+            {
+                Id = 2,
+                name = "guest"
+            });
+
         }
-
 
         public Task<UserAccount> GetByLogin(string userLogin)
         {
