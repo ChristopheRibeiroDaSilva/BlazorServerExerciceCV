@@ -4,8 +4,8 @@ namespace CV_RibeiroChristophe.Data
 {
     public class Role
     {
-        public int Id { get; set; }
+        public int roleId { get; set; }
         [Required]
-        public string? name { get; set; }
+        public string name { get; set; }
     }
 }

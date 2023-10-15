@@ -45,7 +45,7 @@
 
 
 @code {
-    public UserAccount user = new UserAccount();
+    public UserAccountViewModel user = new UserAccountViewModel();
     public string? LoginMesssage { get; set; }
 
     [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
@@ -73,18 +73,19 @@
         user.login = "guest";
         user.password = "guest";
 
-        var returnedUser = await userAccountService.GetByLogin(user.login);
+        user = await userAccountService.GetByLogin(user.login);
 
-        if (returnedUser == null || user.password != returnedUser.password)
+        if (user == null || user.password != user.password)
         {
             LoginMesssage = "Problem logging as guest";
             return;
         }
-        if (returnedUser.login != null)
+        if (user.login != null)
         {
             UserSession userSession = new UserSession();
-            userSession.login = returnedUser.login;
-            userSession.role = returnedUser.roleId;
+
+            userSession.login = user.login;
+            userSession.role = user.roleName;
 
             await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(userSession);
             NavigationManager.NavigateTo("/Aboutme");
@@ -95,18 +96,18 @@
     private async Task ValidateUser()
     {
 
-        var returnedUser = await userAccountService.GetByLogin(user.login);
+        user = await userAccountService.GetByLogin(user.login);
 
-        if (returnedUser == null || user.password != returnedUser.password)
+        if (user == null || user.password != user.password)
         {
             LoginMesssage = "Invalid username or password";
             return;
         }
-        if (returnedUser.login != null)
+        if (user.login != null)
         {
             UserSession userSession = new UserSession();
-            userSession.login = returnedUser.login;
-            userSession.role = returnedUser.roleId;
+            userSession.login = user.login;
+            userSession.role = user.roleName;
 
             await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(userSession);
             NavigationManager.NavigateTo("/Aboutme");

@@ -35,10 +35,9 @@ else
         <label for="role" >Role</label><br />
         <InputSelect @bind-Value="@user.roleId" class="form-select">
             <option value="0">Choose a role</option>
+            <option value="1">admin</option>
+            <option value="2">guest</option>
 
-            @foreach (var role in ListRoles){
-                <option value="@role.Id">@role.name</option>
-            }
         </InputSelect>
     </div>
     <br />
@@ -60,14 +59,12 @@ else
     public string? LoginMesssage { get; set; }
     string btnText = string.Empty;
 
-    public List<Role> ListRoles = new List<Role>();
-
-
     UserAccount user = new UserAccount();
     int roleSelected;
 
     protected override async Task OnInitializedAsync()
     {
+
         btnText = Id == null ? "Save New User" : "Update User";
     }
 
@@ -75,18 +72,6 @@ else
     {
         if(Id != null)
             user = await userAccountService.GetUserById(Id);
-
-        ListRoles.Add(new Role
-            {
-                Id = 1,
-                name = "admin"
-            });
-
-        ListRoles.Add(new Role
-            {
-                Id = 2,
-                name = "guest"
-            });
     }
 
 
