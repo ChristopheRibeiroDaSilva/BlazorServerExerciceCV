@@ -121,19 +121,46 @@ namespace CV_RibeiroChristophe.Data
             }
             return Task.FromResult(ListUsers);
         }
-        private string GetRoleById(int id)
+
+        public Task<List<Role>> GetListRole()
         {
-
-            try
-            {
-
-                return ListRole.FirstOrDefault(u => u.roleId == id).name;
+            try { 
+            return Task.FromResult(ListRole);
             }
             catch
             {
-                return null;
+                ListRole = new List<Role>();
+                return Task.FromResult(ListRole);
             }
         }
 
-    }
+
+		public string GetRoleById(int id)
+		{
+
+			try
+			{
+
+				return ListRole.FirstOrDefault(u => u.roleId == id).name;
+			}
+			catch
+			{
+				return null;
+			}
+		}
+		public Task<string> GetRole(int id)
+		{
+
+			try
+			{
+
+				return Task.FromResult(ListRole.FirstOrDefault(u => u.roleId == id).name);
+			}
+			catch
+			{
+				return null;
+			}
+		}
+
+	}
 }

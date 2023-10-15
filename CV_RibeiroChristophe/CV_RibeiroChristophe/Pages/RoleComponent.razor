@@ -1,0 +1,20 @@
+﻿@attribute [Authorize(Roles = "admin")]
+@using CV_RibeiroChristophe.Data
+@inject IUserAccountService userAccountService
+
+<td>@roleName</td>
+
+
+@code {
+	[Parameter]
+	public int roleId { get; set; }
+
+	public string roleName;
+
+	protected override async Task OnInitializedAsync()
+	{
+		roleName = await userAccountService.GetRole(roleId);
+		//OR
+		//roleName = userAccountService.GetRoleById(roleId);
+	}
+}
