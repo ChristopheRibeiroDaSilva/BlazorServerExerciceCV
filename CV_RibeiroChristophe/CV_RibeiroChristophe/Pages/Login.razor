@@ -73,19 +73,19 @@
         user.login = "guest";
         user.password = "guest";
 
-        user = await userAccountService.GetByLogin(user.login);
+        var returnedUser = await userAccountService.GetByLogin(user.login);
 
-        if (user == null || user.password != user.password)
+        if (user == null || returnedUser.password != user.password)
         {
             LoginMesssage = "Problem logging as guest";
             return;
         }
-        if (user.login != null)
+        if (returnedUser.login != null)
         {
             UserSession userSession = new UserSession();
 
-            userSession.login = user.login;
-            userSession.role = user.roleName;
+            userSession.login = returnedUser.login;
+            userSession.role = returnedUser.roleName;
 
             await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(userSession);
             NavigationManager.NavigateTo("/Aboutme");
@@ -96,18 +96,18 @@
     private async Task ValidateUser()
     {
 
-        user = await userAccountService.GetByLogin(user.login);
+        var returnedUser = await userAccountService.GetByLogin(user.login);
 
-        if (user == null || user.password != user.password)
+        if (user == null || returnedUser.password != user.password)
         {
             LoginMesssage = "Invalid username or password";
             return;
         }
-        if (user.login != null)
+        if (returnedUser.login != null)
         {
             UserSession userSession = new UserSession();
-            userSession.login = user.login;
-            userSession.role = user.roleName;
+            userSession.login = returnedUser.login;
+            userSession.role = returnedUser.roleName;
 
             await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(userSession);
             NavigationManager.NavigateTo("/Aboutme");
