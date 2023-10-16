@@ -33,9 +33,12 @@ else
     </div>
     <div>
         <label for="role" >Role</label><br />
-        <InputSelect @bind-Value="@roleSelected" class="form-select">
-            <option value="0">guest</option>
-            <option value="1">admin</option>
+        <InputSelect @bind-Value="@user.roleId" class="form-select">
+            <option value="0">Choose a role</option>
+            @foreach (var role in ListRole)
+            {
+            <option value="@role.roleId">@role.name</option>
+            }
         </InputSelect>
     </div>
     <br />
@@ -58,10 +61,11 @@ else
     string btnText = string.Empty;
 
     UserAccount user = new UserAccount();
-    int roleSelected;
+    List<Role> ListRole = new List<Role>();
 
     protected override async Task OnInitializedAsync()
     {
+
         btnText = Id == null ? "Save New User" : "Update User";
     }
 
@@ -69,6 +73,11 @@ else
     {
         if(Id != null)
             user = await userAccountService.GetUserById(Id);
+
+        ListRole = await userAccountService.GetListRole();
+        if(ListRole.Count == 0)
+            LoginMesssage = "There is no role";
+
     }
 
 
@@ -76,10 +85,10 @@ else
     {
         if (Id == null)
         {
-            if (roleSelected == 1)
-                user.role = "admin";
-            else
-                user.role = "guest";
+            if (user.roleId == 0){
+                LoginMesssage = "Choose a role";
+                return;
+            }
 
             var response = await userAccountService.AddUser(user);
 

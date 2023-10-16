@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace CV_RibeiroChristophe.Data
 {
@@ -6,11 +7,21 @@ namespace CV_RibeiroChristophe.Data
     {
         public int Id { get; set; }
         [Required]
-        public string? login { get; set; }
+        public string login { get; set; }
         [Required]
-        public string? password { get; set; }
-		[Required]
-		public string? role { get; set; }
+        public string password { get; set; }
+		[Required, ForeignKey(nameof(Role))]
+		public int roleId { get; set; }
+    }
 
+    public class UserAccountViewModel
+    {
+        public int Id { get; set; }
+        [Required]
+        public string login { get; set; }
+        [Required]
+        public string password { get; set; }
+        [Required]
+        public string roleName { get; set; }
     }
 }

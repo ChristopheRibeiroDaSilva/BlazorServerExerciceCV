@@ -45,7 +45,7 @@
 
 
 @code {
-    public UserAccount user = new UserAccount();
+    public UserAccountViewModel user = new UserAccountViewModel();
     public string? LoginMesssage { get; set; }
 
     [CascadingParameter] protected Task<AuthenticationState> AuthStat { get; set; }
@@ -75,7 +75,7 @@
 
         var returnedUser = await userAccountService.GetByLogin(user.login);
 
-        if (returnedUser == null || user.password != returnedUser.password)
+        if (user == null || returnedUser.password != user.password)
         {
             LoginMesssage = "Problem logging as guest";
             return;
@@ -83,8 +83,9 @@
         if (returnedUser.login != null)
         {
             UserSession userSession = new UserSession();
+
             userSession.login = returnedUser.login;
-            userSession.role = returnedUser.role;
+            userSession.role = returnedUser.roleName;
 
             await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(userSession);
             NavigationManager.NavigateTo("/Aboutme");
@@ -97,7 +98,7 @@
 
         var returnedUser = await userAccountService.GetByLogin(user.login);
 
-        if (returnedUser == null || user.password != returnedUser.password)
+        if (user == null || returnedUser.password != user.password)
         {
             LoginMesssage = "Invalid username or password";
             return;
@@ -106,7 +107,7 @@
         {
             UserSession userSession = new UserSession();
             userSession.login = returnedUser.login;
-            userSession.role = returnedUser.role;
+            userSession.role = returnedUser.roleName;
 
             await ((CustomAuthenticationStateProvider)AuthenticationStateProvider).UpdateAuthenticationState(userSession);
             NavigationManager.NavigateTo("/Aboutme");
