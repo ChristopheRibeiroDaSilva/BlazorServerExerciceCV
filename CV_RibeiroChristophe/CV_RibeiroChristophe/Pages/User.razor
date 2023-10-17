@@ -1,6 +1,8 @@
 ﻿@page "/NewUser"
 @page "/User/{id:int}"
 
+@inject IJSRuntime JS
+
 @attribute [Authorize(Roles = "admin")]
 
 @using CV_RibeiroChristophe.Data
@@ -102,19 +104,38 @@ else
         }
         else
         {
-            //await userAccountService.UpdateUser(user);
-            /*if (response == true)
+            if (user.roleId == 0)
+            {
+                LoginMesssage = "Choose a role";
+                return;
+            }
+
+            var response = await userAccountService.EditUser(user);
+
+            if (response == true)
             {
                 NavigationManager.NavigateTo("/Users");
             }
             else
-                LoginMesssage = "Problem logging as guest";
-                */
+                LoginMesssage = "Problem editing user";
+                
         }
     }
 
     async Task DeleteHero()
     {
+        bool confirmed = await JS.InvokeAsync<bool>("confirm", "Are you sure?");
+        if (confirmed)
+        {
+            var response = await userAccountService.DeleteUser(user);
+
+            if (response == true)
+            {
+                NavigationManager.NavigateTo("/Users");
+            }
+            else
+                LoginMesssage = "Problem deleting user";
+        }
         
     }
 

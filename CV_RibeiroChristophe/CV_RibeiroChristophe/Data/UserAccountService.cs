@@ -91,19 +91,56 @@ namespace CV_RibeiroChristophe.Data
         }
 
         public Task<bool> AddUser(UserAccount user)
-		{
-			try
-			{
+        {
+            try
+            {
                 user.Id = ListUser.Count + 1;
-				ListUser.Add(user);
+                ListUser.Add(user);
 
-				return Task.FromResult(true);
-			}
-			catch (Exception ex)
-			{
-				return Task.FromResult(false);
-			}
-		}
+                return Task.FromResult(true);
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(false);
+            }
+
+        }
+        public Task<bool> EditUser(UserAccount user)
+        {
+            
+            try
+            {
+                var oldUser = ListUser.FirstOrDefault(u => u.Id == user.Id);
+
+                ListUser.Remove(oldUser);
+
+                oldUser.Id = user.Id;
+                oldUser.roleId = user.roleId;
+                oldUser.login = user.login;
+                oldUser.password = user.password;
+
+                ListUser.Add(oldUser);
+
+                return Task.FromResult(true);
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(false);
+            }
+        }
+        public Task<bool> DeleteUser(UserAccount user)
+        {
+            try
+            {
+                ListUser.Remove(user);
+
+                return Task.FromResult(true);
+            }
+            catch (Exception ex)
+            {
+                return Task.FromResult(false);
+            }
+        }
 
         public Task<List<UserAccount>> GetListUser()
         {
